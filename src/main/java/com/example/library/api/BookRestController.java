@@ -4,10 +4,8 @@ import com.example.library.dto.BookListItemResponse;
 import com.example.library.dto.BookResponse;
 import com.example.library.dto.CategoryType;
 import com.example.library.dto.SaveBookRequest;
-import com.example.library.model.BookStatus;
 import com.example.library.service.BookListService;
 import com.example.library.service.BookSaveService;
-import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -38,13 +36,13 @@ public class BookRestController {
 
     }
 
-    @GetMapping("/list/{categoryType}")
+    @GetMapping("/list/category/{categoryType}")
     public ResponseEntity<List<BookResponse>> listByCategory(@PathVariable CategoryType categoryType){
         return ResponseEntity.ok(bookListService.searchByCategory(categoryType));
     }
 
-    @GetMapping("/list/{title}")
-    public ResponseEntity<List<BookResponse>> listByCategory(@PathVariable String title){
+    @GetMapping("/list/title/{title}")
+    public ResponseEntity<List<BookResponse>> listByTitle(@PathVariable String title){
         return ResponseEntity.ok(bookListService.searchByTitle(title));
     }
 

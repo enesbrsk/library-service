@@ -9,6 +9,7 @@ import com.example.library.model.Category;
 import com.example.library.repository.BookRepository;
 import com.example.library.repository.CategoryRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
@@ -23,7 +24,8 @@ public class BookListService {
     private final BookRepository bookRepository;
 
     public List<BookResponse> listBooks(int size, int page){
-
+        List<Book> test1 = bookRepository.findAll();
+        Page<Book> test = bookRepository.findAll(PageRequest.of(page, size));
         return bookRepository.findAll(PageRequest.of(page,size))
                 .getContent()
                 .stream()
@@ -46,7 +48,6 @@ public class BookListService {
         return BookResponse.builder()
                 .authorName(model.getAuthorName())
                 .title(model.getTitle())
-                .imageUrl(model.getImage().getImageUrl())
                 .build();
     }
 
@@ -69,7 +70,7 @@ public class BookListService {
                 .map(each ->
                         BookResponse.builder()
                                 .id(each.getId())
-                                .imageUrl(each.getImage().getImageUrl())
+                                .publisher(each.getPublisher())
                                 .build())
                 .collect(Collectors.toList());
     }
