@@ -4,15 +4,17 @@ import com.example.library.model.BookStatus;
 import com.example.library.model.Image;
 import lombok.Data;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
 
 import java.io.File;
 
 @Data
-@Getter
 @SuperBuilder
+@NoArgsConstructor
 public final class BookResponse {
 
+    private Long id;
     private String title;
     private String authorName;
     private BookStatus bookStatus;

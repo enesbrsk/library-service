@@ -6,6 +6,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.Locale;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -17,4 +18,10 @@ public class CategoryService {
         return categoryRepository.findById(id).orElseThrow();
     }
 
+    public Category findByName(String value) {
+
+        final Category category = categoryRepository.findByName(value).orElseThrow(RuntimeException::new);
+        return category;
+
+    }
 }

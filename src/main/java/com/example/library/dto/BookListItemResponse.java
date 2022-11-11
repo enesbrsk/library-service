@@ -11,6 +11,7 @@ import java.io.File;
 @Data
 @SuperBuilder
 public final class BookListItemResponse {
+
     private Long id;
     private String title;
     private String authorName;

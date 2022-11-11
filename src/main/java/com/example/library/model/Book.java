@@ -14,7 +14,6 @@ import javax.persistence.*;
 @SuperBuilder
 public class Book extends BaseEntity{
 
-
     private String title;
     private String authorName;
     @Enumerated(value = EnumType.STRING)

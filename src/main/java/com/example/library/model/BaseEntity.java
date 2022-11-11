@@ -1,6 +1,8 @@
 package com.example.library.model;
 
 import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.experimental.SuperBuilder;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.GeneratedValue;
@@ -12,6 +14,8 @@ import java.time.LocalDateTime;
 
 @MappedSuperclass
 @Data
+@SuperBuilder
+@NoArgsConstructor
 public abstract class BaseEntity {
 
     @Id
