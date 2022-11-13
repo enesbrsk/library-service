@@ -3,6 +3,8 @@ package com.example.library.service;
 import com.example.library.dto.BookResponse;
 import com.example.library.dto.BookSearchRequest;
 import com.example.library.dto.CategoryType;
+import com.example.library.dto.ErrorCode;
+import com.example.library.exception.GenericException;
 import com.example.library.model.Book;
 import com.example.library.model.BookStatus;
 import com.example.library.model.Category;
@@ -31,6 +33,24 @@ public class BookListService {
                 .stream()
                 .map(BookListService::convertResponse)
                 .collect(Collectors.toList());
+
+    }
+
+    public BookResponse findBook(Long bookId){
+
+        final Book fromDb = bookRepository.findById(bookId).orElseThrow(() -> GenericException
+                .builder().errorCode(ErrorCode.BOOK_NOT_FOUND).build());
+
+        return BookResponse.builder()
+                .id(fromDb.getId())
+                .bookStatus(fromDb.getBookStatus())
+                .publisher(fromDb.getPublisher())
+                .authorName(fromDb.getAuthorName())
+                .totalPage(fromDb.getTotalPage())
+                .lastPageNumber(fromDb.getLastPageNumber())
+                .title(fromDb.getTitle())
+                .imageUrl(fromDb.getImage() != null ? fromDb.getImage().getImageUrl() : null)
+                .build();
 
     }
 
