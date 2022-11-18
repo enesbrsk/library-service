@@ -18,5 +18,4 @@ public class GenericException  extends RuntimeException{
     private ErrorCode errorCode;
     private String errorMessage;
 
-
 }

@@ -1,8 +1,6 @@
 package com.example.library.model;
 
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import lombok.experimental.SuperBuilder;
 
 import javax.persistence.*;
@@ -10,8 +8,10 @@ import javax.persistence.*;
 @Entity
 @Table(name = "book")
 @Getter
+@Builder(toBuilder = true)
+@Setter
+@AllArgsConstructor
 @NoArgsConstructor
-@SuperBuilder
 public class Book extends BaseEntity{
 
     private String title;
