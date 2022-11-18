@@ -1,5 +1,4 @@
-package com.example.library.utils;
-
+package com.example.library.service;
 
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.JWTVerifier;
@@ -11,12 +10,13 @@ import org.springframework.http.HttpStatus;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import java.util.Date;
 
 
-@Component
-public class TokenGenerator {
+@Service
+public class TokenService {
 
     @Value("${jwt-variables.KEY}")
     private String KEY;
@@ -25,33 +25,23 @@ public class TokenGenerator {
     @Value("${jwt-variables.EXPIRES_ACCESS_TOKEN_MINUTE}")
     private long EXPIRES_ACCESS_TOKEN_MINUTE;
 
-    public String generateToken(Authentication authentication){
-
-        String username = ((UserDetails) authentication.getPrincipal()).getUsername();
-
+    public String generateToken(Authentication auth) {
+        String username = ((UserDetails) auth.getPrincipal()).getUsername();
         return JWT.create()
                 .withSubject(username)
-                .withExpiresAt(new Date(System.currentTimeMillis()
-                        + (EXPIRES_ACCESS_TOKEN_MINUTE*60*1000)))
+                .withExpiresAt(new Date(System.currentTimeMillis() + (EXPIRES_ACCESS_TOKEN_MINUTE * 60 * 1000)))
                 .withIssuer(ISSUER)
                 .sign(Algorithm.HMAC256(KEY.getBytes()));
     }
 
-    public DecodedJWT verifyJWT(String  token){
-
+    public DecodedJWT verifyJWT(String token) {
         Algorithm algorithm = Algorithm.HMAC256(KEY.getBytes());
-
-        JWTVerifier verifier = JWT.require(algorithm).build();
-
+        JWTVerifier verifier = JWT.require(algorithm).acceptExpiresAt(20).build();
         try {
             return verifier.verify(token);
-
-        }catch (Exception exception){
-            throw GenericException.builder()
-                    .httpStatus(HttpStatus.BAD_REQUEST)
-                    .build();
+        } catch (Exception e) {
+            throw GenericException.builder().httpStatus(HttpStatus.BAD_REQUEST).errorMessage(e.getMessage()).build();
         }
-
     }
 
 

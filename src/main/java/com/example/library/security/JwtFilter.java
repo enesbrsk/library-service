@@ -1,7 +1,7 @@
 package com.example.library.security;
 
 import com.example.library.service.UserDetailsServiceImpl;
-import com.example.library.utils.TokenGenerator;
+import com.example.library.service.TokenService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.http.HttpHeaders;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -22,13 +22,13 @@ import java.util.Map;
 @Component
 public class JwtFilter extends OncePerRequestFilter {
 
-    private final TokenGenerator tokenGenerator;
+    private final TokenService tokenService;
     private final UserDetailsServiceImpl userDetailsService;
     private final ObjectMapper mapper;
 
 
-    public JwtFilter(TokenGenerator tokenGenerator, UserDetailsServiceImpl userDetailsService, ObjectMapper mapper) {
-        this.tokenGenerator = tokenGenerator;
+    public JwtFilter(TokenService tokenService, UserDetailsServiceImpl userDetailsService, ObjectMapper mapper) {
+        this.tokenService = tokenService;
         this.userDetailsService = userDetailsService;
         this.mapper = mapper;
     }
@@ -45,7 +45,7 @@ public class JwtFilter extends OncePerRequestFilter {
         try {
 
             if (!token.isBlank()){
-                username = tokenGenerator.verifyJWT(token).getSubject();
+                username = tokenService.verifyJWT(token).getSubject();
                 UserDetails userDetails = userDetailsService.loadUserByUsername(username);
 
                 UsernamePasswordAuthenticationToken authenticationToken =

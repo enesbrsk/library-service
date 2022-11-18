@@ -1,5 +1,7 @@
 package com.example.library.configuration;
 
+import com.example.library.security.JWTAccessDeniedHandler;
+import com.example.library.security.JwtAuthenticationEntryPoint;
 import com.example.library.security.JwtFilter;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -21,9 +23,13 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 public class SecurityConfig {
 
     private final JwtFilter jwtFilter;
+    private final JWTAccessDeniedHandler accessDeniedHandler;
+    private final JwtAuthenticationEntryPoint jwtAuthenticationEntryPoint;
 
-    public SecurityConfig(JwtFilter jwtFilter) {
+    public SecurityConfig(JwtFilter jwtFilter, JWTAccessDeniedHandler accessDeniedHandler, JwtAuthenticationEntryPoint jwtAuthenticationEntryPoint) {
         this.jwtFilter = jwtFilter;
+        this.accessDeniedHandler = accessDeniedHandler;
+        this.jwtAuthenticationEntryPoint = jwtAuthenticationEntryPoint;
     }
 
     @Bean
@@ -39,12 +45,14 @@ public class SecurityConfig {
                 .cors().and()
                 .csrf().disable()
                 .authorizeRequests( (auth) -> {
-                    auth.antMatchers("/api/admin").hasAuthority("admın");
-                    auth.antMatchers("api/user").hasAnyAuthority("ADMIN","USER");
+                    auth.antMatchers("/api/admin").hasAuthority("ADMIN");
+                    auth.antMatchers("/api/user").hasAnyAuthority("ADMIN","USER");
                     auth.anyRequest().authenticated();
                 })
                 .formLogin().disable()
                 .httpBasic().disable()
+                .exceptionHandling().accessDeniedHandler(accessDeniedHandler)
+                .authenticationEntryPoint(jwtAuthenticationEntryPoint).and()
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and().addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class)
                 .build();
@@ -52,7 +60,7 @@ public class SecurityConfig {
 
     @Bean
     public WebSecurityCustomizer webSecurityCustomizer(){
-        return (web -> web.ignoring().antMatchers("/api/images/**","/api/auth/login"));
+        return (web) -> web.ignoring().antMatchers("/api/public", "/h2-console/**", "/api/auth/login","/api/auth/signup","/**");
     }
 
     @Bean
