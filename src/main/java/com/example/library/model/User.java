@@ -1,8 +1,8 @@
 package com.example.library.model;
 
+import com.example.library.enums.Role;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.RequiredArgsConstructor;
 import lombok.experimental.SuperBuilder;
 
 import javax.persistence.*;

@@ -1,7 +1,7 @@
 package com.example.library.dto;
 
 
-import com.example.library.model.Role;
+import com.example.library.enums.Role;
 import lombok.*;
 
 @AllArgsConstructor

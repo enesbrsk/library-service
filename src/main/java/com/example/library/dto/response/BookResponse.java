@@ -1,9 +1,7 @@
-package com.example.library.dto;
+package com.example.library.dto.response;
 
-import com.example.library.model.BookStatus;
-import com.example.library.model.Image;
+import com.example.library.enums.BookStatus;
 import lombok.Data;
-import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
 
@@ -12,8 +10,7 @@ import java.io.File;
 @Data
 @SuperBuilder
 @NoArgsConstructor
-public final class BookResponse {
-
+public class BookResponse {
     private Long id;
     private String title;
     private String authorName;

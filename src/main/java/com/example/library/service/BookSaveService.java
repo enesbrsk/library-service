@@ -1,7 +1,7 @@
 package com.example.library.service;
 
-import com.example.library.dto.BookListItemResponse;
-import com.example.library.dto.SaveBookRequest;
+import com.example.library.dto.response.BookListItemResponse;
+import com.example.library.dto.request.SaveBookRequest;
 import com.example.library.model.Book;
 import com.example.library.model.Category;
 import com.example.library.repository.BookRepository;

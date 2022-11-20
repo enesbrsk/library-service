@@ -1,4 +1,4 @@
-package com.example.library.dto;
+package com.example.library.dto.request;
 
 import lombok.Data;
 import lombok.Getter;

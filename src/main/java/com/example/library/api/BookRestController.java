@@ -1,9 +1,9 @@
 package com.example.library.api;
 
-import com.example.library.dto.BookListItemResponse;
-import com.example.library.dto.BookResponse;
-import com.example.library.dto.CategoryType;
-import com.example.library.dto.SaveBookRequest;
+import com.example.library.dto.response.BookListItemResponse;
+import com.example.library.dto.response.BookResponse;
+import com.example.library.enums.CategoryType;
+import com.example.library.dto.request.SaveBookRequest;
 import com.example.library.service.BookListService;
 import com.example.library.service.BookSaveService;
 import lombok.RequiredArgsConstructor;

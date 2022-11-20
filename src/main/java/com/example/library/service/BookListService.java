@@ -1,15 +1,13 @@
 package com.example.library.service;
 
-import com.example.library.dto.BookResponse;
-import com.example.library.dto.BookSearchRequest;
-import com.example.library.dto.CategoryType;
-import com.example.library.dto.ErrorCode;
+import com.example.library.dto.response.BookResponse;
+import com.example.library.enums.CategoryType;
+import com.example.library.enums.ErrorCode;
 import com.example.library.exception.GenericException;
 import com.example.library.model.Book;
-import com.example.library.model.BookStatus;
+import com.example.library.enums.BookStatus;
 import com.example.library.model.Category;
 import com.example.library.repository.BookRepository;
-import com.example.library.repository.CategoryRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;

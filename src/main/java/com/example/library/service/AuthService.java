@@ -1,10 +1,10 @@
 package com.example.library.service;
 
-import com.example.library.dto.ErrorCode;
+import com.example.library.enums.ErrorCode;
 import com.example.library.dto.TokenResponseDto;
 import com.example.library.dto.UserDto;
 import com.example.library.exception.GenericException;
-import com.example.library.model.Role;
+import com.example.library.enums.Role;
 import com.example.library.model.User;
 import com.example.library.dto.request.LoginRequest;
 import com.example.library.dto.request.SignUpRequest;
@@ -35,7 +35,7 @@ public class AuthService {
             return TokenResponseDto
                     .builder()
                     .accessToken(tokenService.generateToken(auth))
-                    .userDto(userService.findUser(loginRequest.getUsername()))
+                    .user(userService.findUser(loginRequest.getUsername()))
                     .build();
         } catch (final BadCredentialsException badCredentialsException) {
             throw GenericException.builder().httpStatus(HttpStatus.NOT_FOUND).errorCode(ErrorCode.USER_NOT_FOUND).errorMessage("Invalid Username or Password").build();

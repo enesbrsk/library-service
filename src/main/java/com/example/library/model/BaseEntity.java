@@ -1,7 +1,9 @@
 package com.example.library.model;
 
 import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 import lombok.experimental.SuperBuilder;
 import org.hibernate.annotations.UpdateTimestamp;
 
@@ -13,16 +15,13 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @MappedSuperclass
-@Data
-@SuperBuilder
-@NoArgsConstructor
+@Getter
+@Setter
 public abstract class BaseEntity {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private LocalDateTime createDate = LocalDateTime.now();
     @UpdateTimestamp
     private LocalDateTime updateDate;
-
 }

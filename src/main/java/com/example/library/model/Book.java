@@ -1,7 +1,7 @@
 package com.example.library.model;
 
+import com.example.library.enums.BookStatus;
 import lombok.*;
-import lombok.experimental.SuperBuilder;
 
 import javax.persistence.*;
 
@@ -12,11 +12,10 @@ import javax.persistence.*;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class Book extends BaseEntity{
-
+public class Book extends BaseEntity {
     private String title;
     private String authorName;
-    @Enumerated(value = EnumType.STRING)
+    @Enumerated(EnumType.STRING)
     private BookStatus bookStatus;
     private String publisher;
     private Integer lastPageNumber;
@@ -26,4 +25,9 @@ public class Book extends BaseEntity{
     @ManyToOne
     @JoinColumn(name = "category_id")
     private Category category;
+    private Long userId;
+
+    public Image getImage() {
+        return image == null ? new Image() : image;
+    }
 }
