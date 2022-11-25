@@ -11,15 +11,16 @@ import java.util.List;
 @Entity
 @Table(name = "category")
 @Builder(toBuilder = true)
-@Getter
 @AllArgsConstructor
 @NoArgsConstructor
-public class Category extends BaseEntity {
+@Getter
+@Setter
+public class Category extends BaseEntity{
 
     private String name;
 
     @OneToMany(mappedBy = "category")
     @JsonIgnore
     private List<Book> books;
-
 }
+

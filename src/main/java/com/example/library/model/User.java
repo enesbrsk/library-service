@@ -1,18 +1,22 @@
 package com.example.library.model;
 
 import com.example.library.enums.Role;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
 
 import javax.persistence.*;
 
+
 @Entity
-@Table(name = "user")
-@SuperBuilder
-@NoArgsConstructor
+@Table(name = "users")
 @Data
-public class User extends BaseEntity{
+@AllArgsConstructor
+@NoArgsConstructor
+@Builder
+public class User extends BaseEntity {
 
     @Column(unique = true)
     private String username;
@@ -21,6 +25,5 @@ public class User extends BaseEntity{
     @Enumerated(EnumType.STRING)
     private Role role;
 
-    private String email;
 
 }
