@@ -40,7 +40,7 @@ class BookImageRestControllerTest extends BaseRestControllerTest {
 
         // given - precondition or setup
         String bookId = "1";
-        String imagePath = ";
+        String imagePath = "";
         String baseUrl = String.format(imagePath + "/%s", bookId);
 
         Long bookIdValue = 1L;
