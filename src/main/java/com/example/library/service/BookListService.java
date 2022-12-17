@@ -43,6 +43,7 @@ public class BookListService {
                 .collect(Collectors.toList());
     }
 
+
     private static BookResponse convertResponse(Book model) {
         return BookResponse.builder()
                 .authorName(model.getAuthorName())
