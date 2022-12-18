@@ -9,6 +9,7 @@ import org.springframework.test.context.ActiveProfiles;
 @SpringBootTest
 @AutoConfigureMockMvc
 @ExtendWith(MockitoExtension.class)
+@ActiveProfiles("test")
 public abstract class BaseRestControllerTest{
 
 }
